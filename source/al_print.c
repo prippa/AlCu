@@ -14,26 +14,45 @@
 
 void		al_print_winer(t_alum1 *al)
 {
-	if (al->turn)
+	if ((al->turn && al->stk) || (!al->turn && !al->stk))
 		ft_printf("The %~s WON!\n", F_GREEN, "Player");
 	else
 		ft_printf("The %~s WON!\n", F_GREEN, "AI");
+}
+
+static int	al_get_max_n(t_stack *stk)
+{
+	int max;
+
+	max = stk->n;
+	stk = stk->next;
+	while (stk)
+	{
+		if (max < stk->n)
+			max = stk->n;
+		stk = stk->next;
+	}
+	return (max);
 }
 
 void		al_print_board(t_alum1 *al)
 {
 	t_stack	*tmp;
 	int		len;
+	int		max;
+	int		width;
 
 	ft_clear();
 	len = 1;
 	tmp = al->stk;
+	max = al_get_max_n(tmp);
 	while (tmp)
 	{
 		ft_str_free(&al->buf);
 		al->buf = ft_strnew(tmp->n);
 		al->buf = ft_memset(al->buf, '|', tmp->n);
-		ft_printf("%d) %~s\n", len, F_YELLOW, al->buf);
+		width = (tmp->n + max) / 2;
+		ft_printf("%d) %*~s\n", len, width, F_YELLOW, al->buf);
 		len++;
 		tmp = tmp->next;
 	}

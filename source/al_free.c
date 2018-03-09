@@ -27,4 +27,8 @@ void		al_free(t_alum1 *al)
 		al_stack_free(&al->stk);
 	if (al->buf)
 		ft_str_free(&al->buf);
+	// if (al->pl.player_1)
+	// 	ft_str_free(&al->pl.player_1);
+	// if (al->pl.player_2)
+	// 	ft_str_free(&al->pl.player_2);
 }

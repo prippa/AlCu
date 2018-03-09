@@ -27,7 +27,8 @@ HEAD_ALU	=	alum1.h
 
 C_ALU		=	main.c al_stack_push_pop.c al_stack_revers.c\
 				al_parser.c al_free.c al_init.c\
-				al_print.c al_the_game.c
+				al_print.c al_the_game.c al_valid.c\
+				al_ai_logic.c
 
 
 OBJ_ALU 	= 	$(C_ALU:.c=.o)
