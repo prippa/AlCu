@@ -56,6 +56,8 @@ int					al_parser(t_alum1 *al, char *file_name);
 int					al_stack_push(t_stack **stk, int n);
 void				al_stack_pop(t_stack **stk);
 void				al_stack_revers(t_stack **stk);
+int					al_init_player_vs_ai(t_alum1 *al);
+int					al_init_players(t_alum1 *al);
 void				al_init(t_alum1 *al);
 void				al_free(t_alum1 *al);
 

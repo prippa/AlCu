@@ -64,7 +64,7 @@ int			al_parser(t_alum1 *al, char *file_name)
 		if (!file_name)
 			ft_putstr("->");
 	}
-	if (catch_error == -1)
+	if (catch_error == -1 || !al->stk)
 		return (-1);
 	return (1);
 }

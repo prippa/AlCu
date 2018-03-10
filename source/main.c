@@ -12,32 +12,26 @@
 
 #include "alum1.h"
 
-static int	al_init_player_vs_ai(t_alum1 *al)
+static void	al_print_help(void)
 {
-	if (!(al->pl.player_1 = ft_strdup("Player")))
-		return (-1);
-	if (!(al->pl.player_2 = ft_strdup("AI")))
-		return (-1);
-	return (1);
+	ft_putstr("flag: \"-turn\" - the Player 2 goes first. \
+In standart Player 1 always goes first.\n");
+	ft_putstr("flag: \"-players\" - (Player VS Player) mode\n");
+	ft_putstr("flag: \"-taken\" - Output at the end of \
+game taken (n) matches of the Player 1 and Player 2\n");
 }
 
-static int	al_init_players(t_alum1 *al)
+static int	al_exit_free(t_alum1 *al)
 {
-	ft_clear();
-	ft_putstr("\tPlayers initialization mode\n\n");
-	ft_printf("Write name of the %~s\n->", F_GREEN, "Player 1");
-	ft_str_free(&al->buf);
-	if ((get_next_line(0, &al->buf)) == -1)
-		return (-1);
-	if (!(al->pl.player_1 = ft_strdup(al->buf)))
-		return (-1);
-	ft_str_free(&al->buf);
-	ft_printf("Write name of the %~s\n->", F_MAGENTA, "Player 2");
-	if ((get_next_line(0, &al->buf)) == -1)
-		return (-1);
-	if (!(al->pl.player_2 = ft_strdup(al->buf)))
-		return (-1);
-	return (1);
+	al_free(al);
+	return (0);
+}
+
+static int	al_exit_error_free(t_alum1 *al)
+{
+	ft_dprintf(2, "%~s\n", F_RED, "ERROR");
+	al_free(al);
+	return (-1);
 }
 
 static int	al_bonus_flags(t_alum1 *al, char **argv)
@@ -53,19 +47,16 @@ static int	al_bonus_flags(t_alum1 *al, char **argv)
 			al->pl.flag_players = 1;
 		else if (!ft_strcmp(argv[i], "-taken"))
 			al->pl.flag_taken = 1;
+		else if (!ft_strcmp(argv[i], "-help"))
+		{
+			al_print_help();
+			return (0);
+		}
 		else
 			break ;
 		i++;
 	}
 	return (i);
-}
-
-static int	al_print_error_free(t_alum1 *al)
-{
-	ft_dprintf(2, "%~s\n", F_RED, "ERROR");
-	al_free(al);
-	system("leaks -quiet alum1");
-	return (-1);
 }
 
 int			main(int argc, char **argv)
@@ -74,21 +65,21 @@ int			main(int argc, char **argv)
 	int		skip_bonus_flags;
 
 	al_init(&al);
-	skip_bonus_flags = al_bonus_flags(&al, argv);
+	if (!(skip_bonus_flags = al_bonus_flags(&al, argv)))
+		return (al_exit_free(&al));
 	if (al_parser(&al, argv[skip_bonus_flags]) == -1)
-		return (al_print_error_free(&al));
+		return (al_exit_error_free(&al));
 	if (al.pl.flag_players)
 	{
 		if (al_init_players(&al) == -1)
-			return (al_print_error_free(&al));
+			return (al_exit_error_free(&al));
 	}
 	else if (al_init_player_vs_ai(&al) == -1)
-		return (al_print_error_free(&al));
+		return (al_exit_error_free(&al));
 	if (al_pl_join_color(&al) == -1)
-		return (al_print_error_free(&al));
+		return (al_exit_error_free(&al));
 	if (al_the_game(&al) == -1)
-		return (al_print_error_free(&al));
+		return (al_exit_error_free(&al));
 	al_free(&al);
-	system("leaks -quiet alum1");
 	return (0);
 }
