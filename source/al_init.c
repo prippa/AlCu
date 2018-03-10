@@ -12,12 +12,12 @@
 
 #include "alum1.h"
 
-// void	pl_init(t_players *pl)
-// {
-// 	pl->player_1 = NULL;
-// 	pl->player_2 = NULL;
-// 	pl->flag_players = 0;
-// }
+void	pl_init(t_players *pl)
+{
+	pl->player_1 = NULL;
+	pl->player_2 = NULL;
+	pl->flag_players = 0;
+}
 
 void	al_init(t_alum1 *al)
 {
@@ -25,5 +25,5 @@ void	al_init(t_alum1 *al)
 	al->buf = NULL;
 	al->turn = 0;
 	al->match_taken = 0;
-	//pl_init(&al->pl);
+	pl_init(&al->pl);
 }

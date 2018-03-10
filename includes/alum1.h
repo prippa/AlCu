@@ -36,7 +36,7 @@ typedef	struct		s_alum1
 	int				turn;
 	int				match_taken;
 	int				input_error;
-	//t_players		pl;
+	t_players		pl;
 }					t_alum1;
 
 int					al_ai_logic(t_alum1 *al);
