@@ -53,11 +53,12 @@ int			al_print_and_get_player_info(t_alum1 *al)
 	if ((get_next_line(0, &al->buf)) == -1)
 		return (-1);
 	if (!ft_isstrdigit(al->buf))
-		return (0);
+		return (1);
 	input_take = ft_atoi_max(al->buf);
 	if (input_take > take || input_take < 1)
-		return (0);
-	return ((int)input_take);
+		return (1);
+	al->match_taken = (int)input_take;
+	return (0);
 }
 
 void		al_print_winer(t_alum1 *al)

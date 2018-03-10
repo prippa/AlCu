@@ -14,25 +14,26 @@
 
 static int	al_player_vs_player_mode(t_alum1 *al)
 {
-	int input_take;
+	int status;
 
-	if ((input_take = al_print_and_get_player_info(al)) == -1)
+	if ((status = al_print_and_get_player_info(al)) == -1)
 		return (-1);
-	return ((int)input_take);
+	return (status);
 }
 
 static int	al_ai_vs_player_mode(t_alum1 *al)
 {
-	int input_take;
+	int status;
 
+	status = 0;
 	if (!al->turn)
 	{
-		if ((input_take = al_print_and_get_player_info(al)) == -1)
+		if ((status = al_print_and_get_player_info(al)) == -1)
 			return (-1);
 	}
 	else
-		input_take = al_ai_logic(al);
-	return ((int)input_take);
+		al->match_taken = al_ai_logic(al);
+	return (status);
 }
 
 static int	al_turn(t_alum1 *al)
@@ -56,16 +57,13 @@ int			al_the_game(t_alum1 *al)
 	while (42)
 	{
 		al_print_board(al);
-		if (al->input_error && !(al->input_error = 0))
+		if (al->input_error)
 			ft_printf("%~s: Invalid matches input. Try again!\n",
 				F_BOLD_MAGENTA, "Warning");
-		al->match_taken = al_turn(al);
-		if (!al->match_taken)
-		{
-			al->input_error = 1;
+		al->input_error = al_turn(al);
+		if (al->input_error == 1)
 			continue ;
-		}
-		else if (al->match_taken == -1)
+		else if (al->input_error == -1)
 			return (-1);
 		if (al->pl.flag_taken)
 			al_pl_size_up_taken(al);
