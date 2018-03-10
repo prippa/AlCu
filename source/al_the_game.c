@@ -45,7 +45,7 @@ static int	al_turn(t_alum1 *al)
 
 static void	al_end_game_stage(t_alum1 *al)
 {
-	if (al->match_taken > 0)
+	if (al->match_taken > 0 && !al->pl.flag_players && !al->turn)
 		ft_printf("%s took %d matches\n",
 			(!al->turn ? al->pl.player_2 : al->pl.player_1), al->match_taken);
 	al_print_winer(al);
@@ -57,8 +57,8 @@ int			al_the_game(t_alum1 *al)
 	{
 		al_print_board(al);
 		if (al->input_error && !(al->input_error = 0))
-			ft_printf("%~s Invalid matches input. Try again!\n",
-				F_RED, "ERROR:");
+			ft_printf("%~s: Invalid matches input. Try again!\n",
+				F_BOLD_MAGENTA, "Warning");
 		al->match_taken = al_turn(al);
 		if (!al->match_taken)
 		{

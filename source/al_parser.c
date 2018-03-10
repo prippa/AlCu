@@ -39,7 +39,9 @@ static int	al_valid_line(char *str)
 static void	al_show_instruction(void)
 {
 	ft_clear();
-	ft_putstr("\tManual board initialization mode\n\n->");
+	ft_printf("%~s",
+		F_BOLD_WHITE,
+		"\tManual board initialization mode\n\n->");
 }
 
 int			al_parser(t_alum1 *al, char *file_name)
@@ -62,7 +64,7 @@ int			al_parser(t_alum1 *al, char *file_name)
 			return (-1);
 		ft_str_free(&al->buf);
 		if (!file_name)
-			ft_putstr("->");
+			ft_printf("%~s", F_BOLD_WHITE, "->");
 	}
 	if (catch_error == -1 || !al->stk)
 		return (-1);

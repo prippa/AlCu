@@ -21,7 +21,7 @@ void	al_match_taken(t_alum1 *al)
 
 int		al_game_over(t_alum1 *al)
 {
-	if (!al->stk || (!al->stk->next && al->stk->n < 2))
+	if (!al->stk)
 		return (1);
 	return (0);
 }

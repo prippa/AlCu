@@ -15,7 +15,7 @@
 int			al_pl_join_color(t_alum1 *al)
 {
 	ft_str_free(&al->buf);
-	al->buf = ft_strjoin(GREEN, al->pl.player_1);
+	al->buf = ft_strjoin(BOLD_GREEN, al->pl.player_1);
 	ft_str_free(&al->pl.player_1);
 	if (!(al->pl.player_1 = ft_strdup(al->buf)))
 		return (-1);
@@ -25,7 +25,7 @@ int			al_pl_join_color(t_alum1 *al)
 	if (!(al->pl.player_1 = ft_strdup(al->buf)))
 		return (-1);
 	ft_str_free(&al->buf);
-	al->buf = ft_strjoin(MAGENTA, al->pl.player_2);
+	al->buf = ft_strjoin(BOLD_CYAN, al->pl.player_2);
 	ft_str_free(&al->pl.player_2);
 	if (!(al->pl.player_2 = ft_strdup(al->buf)))
 		return (-1);
@@ -46,8 +46,9 @@ int			al_print_and_get_player_info(t_alum1 *al)
 	if (al->match_taken > 0)
 		ft_printf("%s took %d matches\n",
 			(!al->turn ? al->pl.player_2 : al->pl.player_1), al->match_taken);
-	ft_printf("%s take 1 - %d matches\n->",
+	ft_printf("%s take 1 - %d matches\n",
 		(al->turn ? al->pl.player_2 : al->pl.player_1), take);
+	ft_printf("%~s", F_BOLD_WHITE, "->");
 	ft_str_free(&al->buf);
 	if ((get_next_line(0, &al->buf)) == -1)
 		return (-1);
@@ -68,9 +69,9 @@ void		al_print_winer(t_alum1 *al)
 	if (al->pl.flag_taken)
 	{
 		ft_printf("The %s took - (%~d) matches\n",
-			al->pl.player_1, F_YELLOW, al->pl.taken_player_1);
+			al->pl.player_1, F_BOLD_YELLOW, al->pl.taken_player_1);
 		ft_printf("The %s took - (%~d) matches\n",
-			al->pl.player_2, F_YELLOW, al->pl.taken_player_2);
+			al->pl.player_2, F_BOLD_YELLOW, al->pl.taken_player_2);
 	}
 }
 
@@ -105,7 +106,7 @@ void		al_print_board(t_alum1 *al)
 		al->buf = ft_strnew(tmp->n);
 		al->buf = ft_memset(al->buf, '|', tmp->n);
 		width = ((tmp->n + max) / 2) + (ft_nbrlen(max) - ft_nbrlen(tmp->n));
-		ft_printf("%d) %*~s\n", tmp->n, width, F_YELLOW, al->buf);
+		ft_printf("%d) %s%*s%s\n", tmp->n, BOLD_YELLOW, width, al->buf, COLOR_RESET);
 		tmp = tmp->next;
 	}
 	ft_putchar('\n');

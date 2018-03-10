@@ -15,15 +15,19 @@
 int			al_init_players(t_alum1 *al)
 {
 	ft_clear();
-	ft_putstr("\tPlayers initialization mode\n\n");
-	ft_printf("Write name of the %~s\n->", F_GREEN, "Player 1");
+	ft_printf("%~s",
+		F_BOLD_WHITE,
+		"\tPlayers initialization mode\n\n");
+	ft_printf("Write name of the %~s\n", F_BOLD_GREEN, "Player 1");
+	ft_printf("%~s", F_BOLD_WHITE, "->");
 	ft_str_free(&al->buf);
 	if ((get_next_line(0, &al->buf)) == -1)
 		return (-1);
 	if (!(al->pl.player_1 = ft_strdup(al->buf)))
 		return (-1);
 	ft_str_free(&al->buf);
-	ft_printf("Write name of the %~s\n->", F_MAGENTA, "Player 2");
+	ft_printf("Write name of the %~s\n", F_BOLD_CYAN, "Player 2");
+	ft_printf("%~s", F_BOLD_WHITE, "->");
 	if ((get_next_line(0, &al->buf)) == -1)
 		return (-1);
 	if (!(al->pl.player_2 = ft_strdup(al->buf)))
@@ -56,5 +60,6 @@ void		al_init(t_alum1 *al)
 	al->buf = NULL;
 	al->turn = 0;
 	al->match_taken = 0;
+	al->input_error = 0;
 	pl_init(&al->pl);
 }

@@ -14,11 +14,12 @@
 
 static void	al_print_help(void)
 {
-	ft_putstr("flag: \"-turn\" - the Player 2 goes first. \
-In standart Player 1 always goes first.\n");
-	ft_putstr("flag: \"-players\" - (Player VS Player) mode\n");
-	ft_putstr("flag: \"-taken\" - Output at the end of \
-game taken (n) matches of the Player 1 and Player 2\n");
+	ft_printf("flag: \"%~s\" - the Player 2 goes first. \
+In standart Player 1 always goes first.\n", F_BOLD_WHITE, "-turn");
+	ft_printf("flag: \"%~s\" - (Player VS Player) mode\n",
+		F_BOLD_WHITE, "-players");
+	ft_printf("flag: \"%~s\" - Output at the end of \
+game taken (n) matches of the Player 1 and Player 2\n", F_BOLD_WHITE, "-taken");
 }
 
 static int	al_exit_free(t_alum1 *al)
@@ -29,7 +30,7 @@ static int	al_exit_free(t_alum1 *al)
 
 static int	al_exit_error_free(t_alum1 *al)
 {
-	ft_dprintf(2, "%~s\n", F_RED, "ERROR");
+	ft_dprintf(2, "%~s\n", F_BOLD_RED, "ERROR");
 	al_free(al);
 	return (-1);
 }
