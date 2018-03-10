@@ -63,6 +63,7 @@ int			al_the_game(t_alum1 *al)
 		al->turn = (al->turn ? 0 : 1);
 		if (al_game_over(al))
 			break ;
+		al->pl.turns++;
 	}
 	al_print_winer(al);
 	return (1);

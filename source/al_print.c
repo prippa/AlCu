@@ -75,6 +75,8 @@ void		al_print_winer(t_alum1 *al)
 		ft_printf("The %s took - (%~d) matches\n",
 			al->pl.player_2, F_BOLD_YELLOW, al->pl.taken_player_2);
 	}
+	if (al->pl.flag_turns)
+		ft_printf("Total turns (%~d)\n", F_BOLD_BLUE, al->pl.turns);
 	ft_putchar('\n');
 }
 

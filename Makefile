@@ -12,7 +12,7 @@
 
 NAME		=	alum1
 
-#FLAGS		= 	-Wall -Werror -Wextra
+FLAGS		= 	-Wall -Werror -Wextra
 
 CC			=	gcc
 

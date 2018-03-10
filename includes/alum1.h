@@ -28,6 +28,8 @@ typedef	struct		s_players
 	char			*player_2;
 	int				flag_players;
 	int				flag_taken;
+	int				flag_turns;
+	int				turns;
 	int				taken_player_1;
 	int				taken_player_2;
 }					t_players;
