@@ -17,6 +17,9 @@ void	pl_init(t_players *pl)
 	pl->player_1 = NULL;
 	pl->player_2 = NULL;
 	pl->flag_players = 0;
+	pl->flag_taken = 0;
+	pl->taken_player_1 = 0;
+	pl->taken_player_2 = 0;
 }
 
 void	al_init(t_alum1 *al)

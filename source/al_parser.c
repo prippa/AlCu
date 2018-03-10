@@ -66,6 +66,5 @@ int			al_parser(t_alum1 *al, char *file_name)
 	}
 	if (catch_error == -1)
 		return (-1);
-	al_stack_revers(&al->stk);
 	return (1);
 }
