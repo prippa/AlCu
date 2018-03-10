@@ -44,14 +44,6 @@ static int	al_turn(t_alum1 *al)
 		return (al_ai_vs_player_mode(al));
 }
 
-static void	al_end_game_stage(t_alum1 *al)
-{
-	if (al->match_taken > 0 && !al->pl.flag_players && !al->turn)
-		ft_printf("%s took %d matches\n",
-			(!al->turn ? al->pl.player_2 : al->pl.player_1), al->match_taken);
-	al_print_winer(al);
-}
-
 int			al_the_game(t_alum1 *al)
 {
 	while (42)
@@ -72,6 +64,6 @@ int			al_the_game(t_alum1 *al)
 		if (al_game_over(al))
 			break ;
 	}
-	al_end_game_stage(al);
+	al_print_winer(al);
 	return (1);
 }

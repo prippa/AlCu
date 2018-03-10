@@ -63,6 +63,7 @@ int			al_print_and_get_player_info(t_alum1 *al)
 
 void		al_print_winer(t_alum1 *al)
 {
+	ft_clear();
 	if ((al->turn && al->stk) || (!al->turn && !al->stk))
 		ft_printf("\n\tThe %s WON!\n", al->pl.player_1);
 	else
@@ -74,6 +75,7 @@ void		al_print_winer(t_alum1 *al)
 		ft_printf("The %s took - (%~d) matches\n",
 			al->pl.player_2, F_BOLD_YELLOW, al->pl.taken_player_2);
 	}
+	ft_putchar('\n');
 }
 
 static int	al_get_max_n(t_stack *stk)
@@ -97,8 +99,8 @@ void		al_print_board(t_alum1 *al)
 	int		max;
 	int		width;
 
-	ft_clear();
 	al_stack_revers(&al->stk);
+	ft_clear();
 	tmp = al->stk;
 	max = al_get_max_n(tmp);
 	while (tmp)
