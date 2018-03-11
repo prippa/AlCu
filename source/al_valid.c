@@ -18,9 +18,7 @@ int		al_valid_line(char *str, int valid_num)
 
 	if (!str)
 		return (-1);
-	if (!ft_isstrdigit(str)
-		|| (str[0] && str[0] == '0')
-		|| (str[0] && str[1] && str[1] == '0'))
+	if (!ft_isstrdigit(str))
 		return (-1);
 	n = ft_atoi_max(str);
 	if (n < 1 || n > valid_num)
