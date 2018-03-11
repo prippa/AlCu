@@ -12,6 +12,22 @@
 
 #include "alum1.h"
 
+int		al_valid_line(char *str, int valid_num)
+{
+	long long int n;
+
+	if (!str)
+		return (-1);
+	if (!ft_isstrdigit(str)
+		|| (str[0] && str[0] == '0')
+		|| (str[0] && str[1] && str[1] == '0'))
+		return (-1);
+	n = ft_atoi_max(str);
+	if (n < 1 || n > valid_num)
+		return (-1);
+	return ((int)n);
+}
+
 void	al_match_taken(t_alum1 *al)
 {
 	al->stk->n -= al->match_taken;

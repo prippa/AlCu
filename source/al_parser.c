@@ -24,18 +24,6 @@ static int	al_init_fd(char *file_name)
 	return (fd);
 }
 
-static int	al_valid_line(char *str)
-{
-	long long int n;
-
-	if (!ft_isstrdigit(str))
-		return (-1);
-	n = ft_atoi_max(str);
-	if (n < 1 || n > 10000)
-		return (-1);
-	return ((int)n);
-}
-
 static void	al_show_instruction(void)
 {
 	ft_clear();
@@ -58,7 +46,7 @@ int			al_parser(t_alum1 *al, char *file_name)
 	{
 		if (!ft_strcmp(al->buf, ""))
 			break ;
-		if ((n = al_valid_line(al->buf)) == -1)
+		if ((n = al_valid_line(al->buf, 10000)) == -1)
 			return (-1);
 		if ((al_stack_push(&al->stk, n)) == -1)
 			return (-1);

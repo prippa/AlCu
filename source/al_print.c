@@ -39,8 +39,8 @@ int			al_pl_join_color(t_alum1 *al)
 
 int			al_print_and_get_player_info(t_alum1 *al)
 {
-	int				take;
-	long long int	input_take;
+	int take;
+	int input_take;
 
 	take = al_get_valid_matches(al->stk);
 	if (al->match_taken > 0)
@@ -52,12 +52,9 @@ int			al_print_and_get_player_info(t_alum1 *al)
 	ft_str_free(&al->buf);
 	if ((get_next_line(0, &al->buf)) == -1)
 		return (-1);
-	if (!ft_isstrdigit(al->buf))
+	if ((input_take = al_valid_line(al->buf, take)) == -1)
 		return (1);
-	input_take = ft_atoi_max(al->buf);
-	if (input_take > take || input_take < 1)
-		return (1);
-	al->match_taken = (int)input_take;
+	al->match_taken = input_take;
 	return (0);
 }
 
@@ -111,7 +108,7 @@ void		al_print_board(t_alum1 *al)
 		al->buf = ft_strnew(tmp->n);
 		al->buf = ft_memset(al->buf, '|', tmp->n);
 		width = ((tmp->n + max) / 2) + (ft_nbrlen(max) - ft_nbrlen(tmp->n));
-		ft_printf("%d) %s%*s%s\n", tmp->n, BOLD_YELLOW, width, al->buf, COLOR_RESET);
+		ft_printf("%d) %~*s\n", tmp->n, F_BOLD_YELLOW, width, al->buf);
 		tmp = tmp->next;
 	}
 	ft_putchar('\n');

@@ -52,6 +52,7 @@ void				al_print_winer(t_alum1 *al);
 void				al_print_board(t_alum1 *al);
 int					al_the_game(t_alum1 *al);
 void				al_match_taken(t_alum1 *al);
+int					al_valid_line(char *str, int valid_num);
 int					al_get_valid_matches(t_stack *stk);
 int					al_game_over(t_alum1 *al);
 int					al_parser(t_alum1 *al, char *file_name);
